@@ -19,6 +19,10 @@ import {
 import { animated, useSpring } from "react-spring";
 import { useScroll } from "react-use-gesture";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import { CategoryListContainer } from "../../container/Category";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { productsActions } from "../../_redux/action/product.action";
 
 const styled = makeStyles((theme) => ({
   searchRowItem: {
@@ -44,28 +48,17 @@ const styled = makeStyles((theme) => ({
     height: 150,
   },
 }));
-const clamp = (value, clampAt = 30) => {
-  if (value > 0) {
-    return value > clampAt ? clampAt : value;
-  } else {
-    return value < -clampAt ? -clampAt : value;
-  }
-};
+
 
 export function HomePage() {
   const classes = styled();
-  const [style, set] = useSpring(() => ({
-    transform: "perspective(500px) rotateY(0deg)",
-  }));
-
-  const bind = useScroll((event) => {
-    set({
-      transform: `perspective(500px) rotateY(${
-        event.scrolling ? clamp(event.delta[0]) : 0
-      }deg)`,
-    });
-  });
+  const product = useSelector(state => state.product)
   //todo:
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(productsActions.getCategory())
+  }, [])
   return (
     <>
       <Grid
@@ -89,28 +82,10 @@ export function HomePage() {
         </Grid>
       </Grid>
 
-      <div className={classes.categoryRow} {...bind()}>
-        <animated.div style={{ ...style }}>
-          <ButtonBase className={classes.categoryIcon}>
-            <Avatar variant="square" children="F" />
-          </ButtonBase>
-        </animated.div>
-        <animated.div style={{ ...style }}>
-          <ButtonBase className={classes.categoryIcon}>
-            <Avatar variant="square" children="F" />
-          </ButtonBase>
-        </animated.div>
-        <animated.div style={{ ...style }}>
-          <ButtonBase className={classes.categoryIcon}>
-            <Avatar variant="square" children="F" />
-          </ButtonBase>
-        </animated.div>
-        <animated.div style={{ ...style }}>
-          <ButtonBase className={classes.categoryIcon}>
-            <Avatar variant="square" children="F" />
-          </ButtonBase>
-        </animated.div>
-      </div>
+      <CategoryListContainer 
+        categories={product.category}
+
+      />
 
       <Box>
         Product List
