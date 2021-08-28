@@ -23,6 +23,7 @@ import { CategoryListContainer } from "../../container/Category";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { productsActions } from "../../_redux/action/product.action";
+import { ProductHomeContainer } from "../../container/Product";
 
 const styled = makeStyles((theme) => ({
   searchRowItem: {
@@ -52,7 +53,6 @@ const styled = makeStyles((theme) => ({
 
 export function HomePage() {
   const classes = styled();
-  const product = useSelector(state => state.product)
   //todo:
   const dispatch = useDispatch();
 
@@ -82,58 +82,9 @@ export function HomePage() {
         </Grid>
       </Grid>
 
-      <CategoryListContainer 
-        categories={product.category}
-
-      />
-
-      <Box>
-        Product List
-        <Card>
-          <CardActionArea>
-            <CardMedia
-              className={classes.media}
-              image="https://via.placeholder.com/350x150"
-            />
-            <CardContent>
-              <Typography>Product 1</Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-        <Card>
-          <CardActionArea>
-            <CardMedia
-              className={classes.media}
-              image="https://via.placeholder.com/350x150"
-            />
-            <CardContent>
-              <Typography>Product 1</Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-        <Card>
-          <CardActionArea>
-            <CardMedia
-              className={classes.media}
-              image="https://via.placeholder.com/350x150"
-            />
-            <CardContent>
-              <Typography>Product 1</Typography>
-            </CardContent>
-          </CardActionArea>
-          <Card>
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                image="https://via.placeholder.com/350x150"
-              />
-              <CardContent>
-                <Typography>Product 1</Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        </Card>
-      </Box>
+      <CategoryListContainer />
+      <ProductHomeContainer />
+      
     </>
   );
 }

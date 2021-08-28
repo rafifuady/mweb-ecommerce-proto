@@ -1,51 +1,23 @@
 import React from "react";
-import {
-  Avatar,
-  Box,
-  Button,
-  ButtonBase,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Grid,
-  InputBase,
-  List,
-  makeStyles,
-  OutlinedInput,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import { Avatar, Box, ButtonBase, makeStyles } from "@material-ui/core";
 import { animated, useSpring } from "react-spring";
 import { useScroll } from "react-use-gesture";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import { useSelector } from "react-redux";
 
 const styled = makeStyles((theme) => ({
-  searchRowItem: {
-    padding: theme.spacing(2, 0),
-  },
-  searchRow: {
-    backgroundColor: "#F0E5CF",
-  },
-  wishlist: {
-    padding: theme.spacing(2, 0),
-  },
   categoryIcon: {
     padding: theme.spacing(2, 4),
     flexShrink: 0,
-    display: "block"
+    display: "block",
   },
   categoryText: {
-    margin: theme.spacing(2,0,0,0),
+    margin: theme.spacing(2, 0, 0, 0),
   },
   categoryRow: {
     display: "flex",
     overflowX: "scroll",
     width: "100%",
     margin: theme.spacing(2, 0),
-  },
-  media: {
-    height: 150,
   },
 }));
 
@@ -57,8 +29,12 @@ const clamp = (value, clampAt = 30) => {
   }
 };
 
-export function CategoryListContainer({ categories }) {
+export function CategoryListContainer() {
   const classes = styled();
+
+  const { category, isLoading } = useSelector((state) => state.product);
+
+  /////////////////
   const [style, set] = useSpring(() => ({
     transform: "perspective(500px) rotateY(0deg)",
   }));
@@ -70,13 +46,18 @@ export function CategoryListContainer({ categories }) {
       }deg)`,
     });
   });
+  /////////////////////
   return (
     <>
       <div className={classes.categoryRow} {...bind()}>
-        {categories &&
-          categories.map((val, index) => (
-            <animated.div style={{ ...style }}>
-              <ButtonBase className={classes.categoryIcon} key={index}>
+        {isLoading && "Loading"}
+        {category &&
+          category.map((val, index) => (
+            <animated.div style={{ ...style }} key={index}>
+              <ButtonBase
+                className={classes.categoryIcon}
+                onClick={() => console.log("go to category")}
+              >
                 <Avatar
                   variant="square"
                   src={val.imageUrl}

@@ -7,7 +7,7 @@ import {
 import RestoreIcon from "@material-ui/icons/Restore";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
-import { NavLink } from "react-router-dom";
+import { NavLink as RouterLink } from "react-router-dom";
 
 const style = makeStyles({
   root: {
@@ -29,12 +29,10 @@ export function NavigationContainer() {
         showLabels
         className={classes.root}
       >
-        <BottomNavigationAction label="Home" 
-        // component={()=> <NavLink />} 
-        />
-        <BottomNavigationAction label="Feed" />
-        <BottomNavigationAction label="Cart" />
-        <BottomNavigationAction label="Profile" />
+        <BottomNavigationAction label="Home"  component={RouterLink} to="/" />
+        <BottomNavigationAction label="Feed" component={RouterLink} to="/feed" />
+        <BottomNavigationAction label="Cart" component={RouterLink} to="/cart"/>
+        <BottomNavigationAction label="Profile" component={RouterLink} to="/history"/>
       </BottomNavigation>
     </>
   );
