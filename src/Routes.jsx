@@ -1,24 +1,24 @@
-import React, { useEffect }  from 'react'
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
 } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
-import { BrowserPage } from './pages/BrowserPage';
-import { LoginPage } from './pages/Auth';
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserPage } from "./pages/BrowserPage";
+import { LoginPage } from "./pages/Auth";
 
-import { appStateActions, authActions }from './_redux/action'
-import { HomePage } from './pages/Home';
-import PrivateRoute from './component/PrivateRoute';
+import { appStateActions, authActions } from "./_redux/action";
+import { HomePage } from "./pages/Home";
+import PrivateRoute from "./component/PrivateRoute";
+import { NavigationContainer } from "./container/Navigation";
 
 export function Routes() {
   const dispatch = useDispatch();
 
   const auth = useSelector((state) => state.auth);
   const appState = useSelector((state) => state.appState);
-
 
   useEffect(() => {
     dispatch(appStateActions.checkDevice());
@@ -27,9 +27,7 @@ export function Routes() {
       dispatch(authActions.checkAuth());
     });
     return () => storageListener && storageListener.removeEventListener();
-
-  }, [])
-
+  }, []);
 
   return appState.isAppReady ? (
     <Router>
@@ -38,13 +36,20 @@ export function Routes() {
           {appState.appScreenMobile ? <Redirect to="/" /> : <BrowserPage />}
         </Route>
         <Route exact path="/Login">
-          {appState.appScreenBrowser? <Redirect to="/coming-soon" /> : <LoginPage /> }
+          {appState.appScreenBrowser ? (
+            <Redirect to="/coming-soon" />
+          ) : (
+            <LoginPage />
+          )}
         </Route>
-        <PrivateRoute path="/" component={()=><HomePage />}>
+        <PrivateRoute path="/" component={() => <HomePage />}>
           {/* {appState.appScreenBrowser ? <Redirect to="/coming-soon" /> : (<HomePage />)} */}
           {/* {appState.appScreenMobile ? <Redirect to="/" /> : <HomePage />} */}
         </PrivateRoute>
       </Switch>
+      {auth.isAuthenticated === true ? <NavigationContainer /> : ""}
     </Router>
-  ) : "loading"
+  ) : (
+    "loading"
+  );
 }
