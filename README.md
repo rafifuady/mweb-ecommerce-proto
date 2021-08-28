@@ -62,3 +62,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
     - redux/action/reducer = *.js
 
 - Semantic Commit Messages : https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716
+- https://colorhunt.co/palette/f0e5cff7f6f2c8c6c64b6587
