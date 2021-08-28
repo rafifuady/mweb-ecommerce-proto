@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Grid, makeStyles } from "@material-ui/core";
 
-const style = makeStyles((theme) => ({
+const style = makeStyles(() => ({
   wrapper: {
     backgroundColor: "#F0E5CF",
     textAlign: "center",

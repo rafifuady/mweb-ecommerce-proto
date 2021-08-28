@@ -9,21 +9,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserPage } from './pages/BrowserPage';
 import { LoginPage } from './pages/Auth';
 
-import { appStateActions }from './_redux/action'
+import { appStateActions, authActions }from './_redux/action'
 import { HomePage } from './pages/Home';
+import PrivateRoute from './component/PrivateRoute';
 
 export function Routes() {
   const dispatch = useDispatch();
+
   const auth = useSelector((state) => state.auth);
   const appState = useSelector((state) => state.appState);
 
 
   useEffect(() => {
     dispatch(appStateActions.checkDevice());
+    dispatch(authActions.checkAuth());
+    let storageListener = window.addEventListener("storage", () => {
+      dispatch(authActions.checkAuth());
+    });
+    return () => storageListener && storageListener.removeEventListener();
+
   }, [])
 
 
-  return (
+  return appState.isAppReady ? (
     <Router>
       <Switch>
         <Route path="/coming-soon">
@@ -32,11 +40,11 @@ export function Routes() {
         <Route exact path="/Login">
           {appState.appScreenBrowser? <Redirect to="/coming-soon" /> : <LoginPage /> }
         </Route>
-        <Route path="/">
-          {appState.appScreenBrowser ? <Redirect to="/coming-soon" /> : <HomePage />}
-        </Route>
-        
+        <PrivateRoute path="/" component={()=><HomePage />}>
+          {/* {appState.appScreenBrowser ? <Redirect to="/coming-soon" /> : (<HomePage />)} */}
+          {/* {appState.appScreenMobile ? <Redirect to="/" /> : <HomePage />} */}
+        </PrivateRoute>
       </Switch>
     </Router>
-  )
+  ) : "loading"
 }
