@@ -13,9 +13,8 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ShareIcon from "@material-ui/icons/Share";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import FavoriteOutlinedIcon from "@material-ui/icons/FavoriteOutlined";
 import { productsActions } from "../../_redux/action/product.action";
+import { ButtonWishlistContainer } from "../../container/Profile/ButtonWishlistContainer";
 
 const styled = makeStyles((theme) => ({
   media: {
@@ -106,18 +105,7 @@ export function ProductDetailPage() {
               className={classes.titleRow}
             >
               <Typography variant="h4">{filteredProduct[0].title}</Typography>
-              <Button>
-                {filteredProduct[0].loved === 1 && (
-                  <FavoriteOutlinedIcon
-                    onClick={() => alert("Remove from Wishlist")}
-                  />
-                )}
-                {filteredProduct[0].loved === 0 && (
-                  <FavoriteBorderIcon
-                    onClick={() => alert("added To Wishlist")}
-                  />
-                )}
-              </Button>
+              <ButtonWishlistContainer id={filteredProduct[0].id} />
             </Grid>
           </Card>
           <Box my={3} px={3}>

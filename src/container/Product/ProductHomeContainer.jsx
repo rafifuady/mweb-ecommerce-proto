@@ -7,15 +7,12 @@ import {
   CardMedia,
   Typography,
   makeStyles,
-  Button,
   Grid,
 } from "@material-ui/core";
-import { useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import FavoriteOutlinedIcon from "@material-ui/icons/FavoriteOutlined";
+import { ButtonWishlistContainer } from "../Profile/ButtonWishlistContainer";
 
-const styled = makeStyles((theme) => ({
+const styled = makeStyles(() => ({
   media: {
     height: 150,
   },
@@ -39,10 +36,13 @@ const filterProduct = (products, query) => {
   });
 };
 
-export function ProductHomeContainer({ searchValue }) {
+export function ProductHomeContainer({
+  searchValue,
+  product,
+  isLoading,
+  productWishlisted,
+}) {
   const classes = styled();
-
-  const { product, isLoading } = useSelector((state) => state.product);
 
   const filteredProduct = filterProduct(product, searchValue);
 
@@ -60,10 +60,15 @@ export function ProductHomeContainer({ searchValue }) {
             </CardActionArea>
             <CardContent className={classes.cardTitle}>
               <Grid container direction="row">
-                <Button>
+                {/* <Button>
                   {val.loved === 1 && <FavoriteOutlinedIcon />}
                   {val.loved === 0 && <FavoriteBorderIcon />}
-                </Button>
+                </Button> */}
+                <ButtonWishlistContainer
+                  product={val}
+                  id={val.id}
+                  loved={val.loved}
+                />
                 <Box mt={1}>
                   <Typography>{val.title}</Typography>
                 </Box>

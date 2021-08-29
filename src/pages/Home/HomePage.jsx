@@ -1,16 +1,12 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Grid,
-  makeStyles,
-  OutlinedInput,
-} from "@material-ui/core";
+import { Button, Grid, makeStyles, OutlinedInput } from "@material-ui/core";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { CategoryListContainer } from "../../container/Category";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { productsActions } from "../../_redux/action/product.action";
 import { ProductHomeContainer } from "../../container/Product";
+import { useHistory } from "react-router";
 
 const styled = makeStyles((theme) => ({
   searchRowItem: {
@@ -30,8 +26,10 @@ const styled = makeStyles((theme) => ({
 
 export function HomePage() {
   const classes = styled();
-  //todo:
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const { product, isLoading, productWishlisted } = useSelector((state) => state.product);
 
   const [search, setSearch] = useState("");
 
@@ -49,7 +47,7 @@ export function HomePage() {
       >
         <Grid item className={classes.searchRowItem}>
           <Button className={classes.wishlist}>
-            <FavoriteBorderIcon />
+            <FavoriteBorderIcon onClick={() => history.push("/wishlist")} />
           </Button>
         </Grid>
         <Grid item className={classes.searchRowItem}>
@@ -69,7 +67,12 @@ export function HomePage() {
 
       {search === "" && <CategoryListContainer />}
       <Grid item className={classes.productRow}>
-        <ProductHomeContainer searchValue={search} />
+        <ProductHomeContainer
+          searchValue={search}
+          product={product}
+          isLoading={isLoading}
+          productWishlisted={productWishlisted} 
+        />
       </Grid>
     </>
   );
