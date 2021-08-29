@@ -38,23 +38,41 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Code Convention / Rules
 ├───component               : Custom Component
+
 ├───container               : Consume State, do logical function
+
 │   ├───Auth
+
 │   ├───Product
+
 │   └───Profile
+
 ├───pages                   : Layouting
+
 │   ├───Auth
+
 │   ├───Home
+
 │   ├───Product
+
 │   ├───Profile
+
 │   └───Search
+
 ├───_redux                  : State Management
+
 │   ├───action
+
 │   ├───constant
+
 │   └───reducer
+
 ├───_services
+
 ├───_utils
+
 ├Routes                     : Page Routing Management
+
 
 - File Ending
     - JSX = *.jsx
@@ -63,3 +81,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 - Semantic Commit Messages : https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716
 - https://colorhunt.co/palette/f0e5cff7f6f2c8c6c64b6587
+
+## TODO
+- refactore Product Detail Page
