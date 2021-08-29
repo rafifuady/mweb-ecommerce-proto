@@ -1,14 +1,16 @@
 import { productsContants } from '../constant'
 
 const initialState = {
-    productBought: []
+    productBought: [],
+    productWishlisted: []
 }
 
  export function product(state = initialState, action) {
   let returnData = state
 
+   // eslint-disable-next-line 
   Object.values(productsContants).map(ctx => {
-      if (ctx == action.type) {
+      if (ctx === action.type) {
           returnData = { ...returnData, ...action.payload }
       }
   })

@@ -1,25 +1,14 @@
 import React, { useState } from "react";
 import {
-  Avatar,
-  Box,
   Button,
-  ButtonBase,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
   Grid,
-  InputBase,
-  List,
   makeStyles,
   OutlinedInput,
-  TextField,
-  Typography,
 } from "@material-ui/core";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { CategoryListContainer } from "../../container/Category";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { productsActions } from "../../_redux/action/product.action";
 import { ProductHomeContainer } from "../../container/Product";
 
@@ -48,6 +37,7 @@ export function HomePage() {
 
   useEffect(() => {
     dispatch(productsActions.getCategory());
+    // eslint-disable-next-line
   }, []);
   return (
     <>
@@ -77,7 +67,7 @@ export function HomePage() {
         </Grid>
       </Grid>
 
-      {search == "" && <CategoryListContainer />}
+      {search === "" && <CategoryListContainer />}
       <Grid item className={classes.productRow}>
         <ProductHomeContainer searchValue={search} />
       </Grid>

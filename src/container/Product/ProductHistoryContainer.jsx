@@ -1,18 +1,11 @@
 import React from "react";
 import {
-  Box,
-  Button,
-  ButtonBase,
-  Card,
-  CardMedia,
   Grid,
   makeStyles,
   Paper,
   Typography,
 } from "@material-ui/core";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import ShareIcon from "@material-ui/icons/Share";
-import { useHistory, useParams } from "react-router";
+import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
 
 const styled = makeStyles((theme) => ({
@@ -67,13 +60,14 @@ export function ProductHistoryContainer() {
       productBought &&
       productBought.map((val,index) => (
       <Paper
+        key={index}
         elevation={6}
         className={classes.wrapper}
         onClick={() => history.push(`/product/detail/${val.id}`)}
       >
         <Grid container direction="row" alignItems="center" justifyContent="space-evenly">
           <Grid item className={classes.checkoutItem}>
-            <img src={val.imageUrl} className={classes.media} />
+            <img alt={val.title} src={val.imageUrl} className={classes.media} />
           </Grid>
           <Grid item className={classes.checkoutItem}>
             <Grid container direction="column" style={{ margin: "5px" }}>

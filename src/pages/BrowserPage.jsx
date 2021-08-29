@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Box, Grid, makeStyles } from "@material-ui/core";
+import { Typography, Box, makeStyles } from "@material-ui/core";
 import { PageWrapper } from "../component";
 
 const style = makeStyles(() => ({

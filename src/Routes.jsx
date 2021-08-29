@@ -29,6 +29,7 @@ export function Routes() {
       dispatch(authActions.checkAuth());
     });
     return () => storageListener && storageListener.removeEventListener();
+  // eslint-disable-next-line
   }, []);
 
   return appState.isAppReady ? (

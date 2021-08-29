@@ -1,6 +1,5 @@
 import { productService } from "../../_services/productService";
 import { productsContants } from "../constant";
-import { authActions } from "./auth.action";
 
 export const productsActions = {
   getCategory,
@@ -67,5 +66,32 @@ function checkout(payload, productBought) {
     }))}
 
     setTimeout(success, 1000);
+  }
+}
+
+
+function addToWishlist(payload, productWishlisted) {
+  return (dispatch) => {
+    const success = () => {
+      productWishlisted.push(payload)
+      return(dispatch({
+      type: productsContants.ADD_WISHILIST,
+      payload: {
+        isLoading: false,
+        productWishlisted: [ ...productWishlisted]
+      }
+    }))}
+
+    setTimeout(success, 1000);
+  }
+}
+
+
+function removeFromWishlist(payload, productWishlisted) {
+  return {
+    type: productsContants.REMOVE_WISHILIST,
+    payload: {
+      wishlist: -1
+    }
   }
 }

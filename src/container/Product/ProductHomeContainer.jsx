@@ -10,8 +10,7 @@ import {
   Button,
   Grid,
 } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteOutlinedIcon from "@material-ui/icons/FavoriteOutlined";
@@ -31,16 +30,16 @@ const styled = makeStyles((theme) => ({
 
 const filterProduct = (products, query) => {
   if (!query) {
-    return products
+    return products;
   }
 
   return products.filter((product) => {
     const productName = product.title.toLowerCase();
-    return productName.includes(query)
-  })
-}
+    return productName.includes(query);
+  });
+};
 
-export function ProductHomeContainer({searchValue}) {
+export function ProductHomeContainer({ searchValue }) {
   const classes = styled();
 
   const { product, isLoading } = useSelector((state) => state.product);
