@@ -109,18 +109,19 @@ export function LoginContainer() {
         </Box>
         <Box mb={2} px={5}>
           <Button
+            id="googleBtn"
             children="Facebook"
+            type="submit"
             variant="contained"
-            // color="primary"
             fullWidth
           />
         </Box>
         <Box mb={2} px={5}>
           <Button
             id="googleBtn"
+            type="submit"
             children="Google"
             variant="contained"
-            color="primary"
             fullWidth
           >
             GOOGLE
