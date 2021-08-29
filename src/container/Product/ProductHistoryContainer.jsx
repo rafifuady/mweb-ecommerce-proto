@@ -14,10 +14,10 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ShareIcon from "@material-ui/icons/Share";
 import { useHistory, useParams } from "react-router";
 import { useSelector } from "react-redux";
-import { ProductHistoryContainer } from "../../container/Product";
 
 const styled = makeStyles((theme) => ({
   media: {
+    maxHeight: 150,
     maxWidth: 150,
   },
   cardTitle: {
@@ -46,36 +46,47 @@ const styled = makeStyles((theme) => ({
     zIndex: "5",
   },
   checkoutItem: {
+    minHeight: "20vh",
+    maxWidth: "30vw",
     margin: theme.spacing(0, 2),
   },
   wrapper: {
-    margin: theme.spacing(0,2)
+    minHeight: "20vh",
+    margin: theme.spacing(4, 2),
+    padding: theme.spacing(4,0)
   },
 }));
 
-export function PurchasedHistoryPage() {
+export function ProductHistoryContainer() {
   const classes = styled();
   const history = useHistory();
+  const { productBought } = useSelector((state) => state.product);
   return (
     <>
-      <Grid
-        container
-        direction="row"
-        justifyContent="space-between"
-        className={classes.headerRow}
+    {
+      productBought &&
+      productBought.map((val,index) => (
+      <Paper
+        elevation={6}
+        className={classes.wrapper}
+        onClick={() => history.push(`/product/detail/${val.id}`)}
       >
-        <ButtonBase
-          className={classes.headerIcon}
-          children={<ArrowBackIcon />}
-          onClick={() => history.goBack()}
-        />
-        <ButtonBase
-          className={classes.headerIcon}
-          children={<ShareIcon onClick={() => alert("Shared !")} />}
-        />
-      </Grid>
-      <Typography variant="h5">Purchased History</Typography>
-    <ProductHistoryContainer />
+        <Grid container direction="row" alignItems="center" justifyContent="space-evenly">
+          <Grid item className={classes.checkoutItem}>
+            <img src={val.imageUrl} className={classes.media} />
+          </Grid>
+          <Grid item className={classes.checkoutItem}>
+            <Grid container direction="column" style={{ margin: "5px" }}>
+              <Typography style={{ fontWeight: 600 }}>
+                {val.title}
+              </Typography>
+              <Typography>{val.price}</Typography>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Paper>
+      ))
+    }
     </>
   );
 }

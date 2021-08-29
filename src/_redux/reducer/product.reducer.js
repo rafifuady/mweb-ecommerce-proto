@@ -1,6 +1,7 @@
 import { productsContants } from '../constant'
 
 const initialState = {
+    productBought: []
 }
 
  export function product(state = initialState, action) {

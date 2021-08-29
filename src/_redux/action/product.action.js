@@ -4,6 +4,7 @@ import { authActions } from "./auth.action";
 
 export const productsActions = {
   getCategory,
+  checkout,
 };
 
 const productServiceInstance = new productService();
@@ -44,4 +45,27 @@ function getCategory() {
       });
     }
   };
+}
+
+function checkout(payload, productBought) {
+  return (dispatch) => {
+    dispatch({
+      type: productsContants.BUY_REQUEST,
+      payload: {
+        isLoading: true
+      }
+    })
+
+    const success = () => {
+      productBought.push(payload)
+      return(dispatch({
+      type: productsContants.BUY_SUCCESS,
+      payload: {
+        isLoading: false,
+        productBought: [ ...productBought]
+      }
+    }))}
+
+    setTimeout(success, 1000);
+  }
 }
