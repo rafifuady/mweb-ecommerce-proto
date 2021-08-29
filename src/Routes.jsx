@@ -13,7 +13,7 @@ import { appStateActions, authActions } from "./_redux/action";
 import { HomePage } from "./pages/Home";
 import PrivateRoute from "./component/PrivateRoute";
 import { NavigationContainer } from "./container/Navigation";
-import { ProducDetailPage } from "./pages/Product/ProducDetailPage";
+import { ProductDetailPage } from "./pages/Product/ProductDetailPage";
 import { PurchasedHistoryPage } from "./pages/Profile";
 
 export function Routes() {
@@ -45,7 +45,7 @@ export function Routes() {
           )}
         </Route>
         <PrivateRoute path="/history" component={()=> <PurchasedHistoryPage />} />
-        <PrivateRoute path="/product/detail/:id" component={()=> <ProducDetailPage />} />
+        <PrivateRoute path="/product/detail/:id" component={()=> <ProductDetailPage />} />
         <PrivateRoute path="/" component={() => <HomePage />}>
           {/* {appState.appScreenBrowser ? <Redirect to="/coming-soon" /> : (<HomePage />)} */}
           {/* {appState.appScreenMobile ? <Redirect to="/" /> : <HomePage />} */}

@@ -64,7 +64,7 @@ const filterProduct = (products, id) => {
   });
 };
 
-export function ProducDetailPage() {
+export function ProductDetailPage() {
   const classes = styled();
   const { id } = useParams();
   const history = useHistory();
