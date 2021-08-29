@@ -48,10 +48,9 @@ export function Routes() {
         <PrivateRoute path="/wishlist" component={()=> <MyWishlistPage />} />
         <PrivateRoute path="/history" component={()=> <PurchasedHistoryPage />} />
         <PrivateRoute path="/product/detail/:id" component={()=> <ProductDetailPage />} />
-        <PrivateRoute path="/" component={() => <HomePage />}>
-          {/* {appState.appScreenBrowser ? <Redirect to="/coming-soon" /> : (<HomePage />)} */}
+        <PrivateRoute path="/" component={() => <HomePage />} />
+          {/* {appState.appScreenBrowser ? <Redirect to="/coming-soon" /> : (<LoginPage />)} */}
           {/* {appState.appScreenMobile ? <Redirect to="/" /> : <HomePage />} */}
-        </PrivateRoute>
       </Switch>
       {auth.isAuthenticated && <NavigationContainer />}
     </Router>
