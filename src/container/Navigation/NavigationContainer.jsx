@@ -31,8 +31,8 @@ export function NavigationContainer() {
       >
         <BottomNavigationAction label="Home"  component={RouterLink} to="/" />
         <BottomNavigationAction label="Feed" component={RouterLink} to="/feed" />
-        <BottomNavigationAction label="Cart" component={RouterLink} to="/cart"/>
-        <BottomNavigationAction label="Profile" component={RouterLink} to="/history"/>
+        <BottomNavigationAction label="Cart" component={RouterLink} to="/history"/>
+        <BottomNavigationAction label="Profile" component={RouterLink} to="/wishlist"/>
       </BottomNavigation>
     </>
   );

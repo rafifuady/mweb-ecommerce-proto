@@ -14,7 +14,7 @@ import { HomePage } from "./pages/Home";
 import PrivateRoute from "./component/PrivateRoute";
 import { NavigationContainer } from "./container/Navigation";
 import { ProductDetailPage } from "./pages/Product/ProductDetailPage";
-import { PurchasedHistoryPage } from "./pages/Profile";
+import { PurchasedHistoryPage, MyWishlistPage } from "./pages/Profile";
 
 export function Routes() {
   const dispatch = useDispatch();
@@ -44,6 +44,7 @@ export function Routes() {
             <LoginPage />
           )}
         </Route>
+        <PrivateRoute path="/wishlist" component={()=> <MyWishlistPage />} />
         <PrivateRoute path="/history" component={()=> <PurchasedHistoryPage />} />
         <PrivateRoute path="/product/detail/:id" component={()=> <ProductDetailPage />} />
         <PrivateRoute path="/" component={() => <HomePage />}>
