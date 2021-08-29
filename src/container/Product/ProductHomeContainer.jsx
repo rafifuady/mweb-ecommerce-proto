@@ -29,18 +29,32 @@ const styled = makeStyles((theme) => ({
   },
 }));
 
-export function ProductHomeContainer() {
+const filterProduct = (products, query) => {
+  if (!query) {
+    return products
+  }
+
+  return products.filter((product) => {
+    const productName = product.title.toLowerCase();
+    return productName.includes(query)
+  })
+}
+
+export function ProductHomeContainer({searchValue}) {
   const classes = styled();
 
   const { product, isLoading } = useSelector((state) => state.product);
 
-  const history = useHistory();
+  const filteredProduct = filterProduct(product, searchValue);
+
+  console.log(filteredProduct)
+  console.log(filteredProduct)
 
   return (
     <>
       {isLoading && "Loading"}
-      {product &&
-        product.map((val, index) => (
+      {filteredProduct &&
+        filteredProduct.map((val, index) => (
           <Card key={index} variant="outlined" className={classes.card}>
             <CardActionArea
               component={RouterLink}

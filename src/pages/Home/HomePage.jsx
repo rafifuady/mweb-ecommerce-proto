@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Avatar,
   Box,
@@ -16,8 +16,6 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import { animated, useSpring } from "react-spring";
-import { useScroll } from "react-use-gesture";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { CategoryListContainer } from "../../container/Category";
 import { useEffect } from "react";
@@ -35,19 +33,6 @@ const styled = makeStyles((theme) => ({
   wishlist: {
     padding: theme.spacing(2, 0),
   },
-  categoryIcon: {
-    padding: theme.spacing(2, 4),
-    flexShrink: 0,
-  },
-  categoryRow: {
-    display: "flex",
-    overflowX: "scroll",
-    width: "100%",
-    margin: theme.spacing(2, 0),
-  },
-  media: {
-    height: 150,
-  },
   productRow: {
     overflowY: "scroll",
     margin: theme.spacing(5, 0),
@@ -58,6 +43,8 @@ export function HomePage() {
   const classes = styled();
   //todo:
   const dispatch = useDispatch();
+
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     dispatch(productsActions.getCategory());
@@ -81,13 +68,18 @@ export function HomePage() {
             variant="outlined"
             placeholder="Search…"
             inputProps={{ "aria-label": "search" }}
+            onChange={(e) => {
+              setTimeout(() => {
+                setSearch(e.target.value);
+              }, 3000);
+            }}
           />
         </Grid>
       </Grid>
 
-      <CategoryListContainer />
+      {search == "" && <CategoryListContainer />}
       <Grid item className={classes.productRow}>
-        <ProductHomeContainer />
+        <ProductHomeContainer searchValue={search} />
       </Grid>
     </>
   );
