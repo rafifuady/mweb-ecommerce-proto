@@ -11,7 +11,7 @@ const productServiceInstance = new productService();
 function getCategory() {
   return async (dispatch) => {
     dispatch({
-      type: productsContants.CATEGORY_REQUEST,
+      type: productsContants.HOME_REQUEST,
       payload: {
         isLoading: true,
       },
@@ -23,17 +23,17 @@ function getCategory() {
     if (isError === true) {
       //check if failed service instance
       dispatch({
-        type: productsContants.CATEGORY_FAILED,
+        type: productsContants.HOME_FAILED,
         payload: {
           isError: true,
           isLoading: false,
           
         },
-      });
+      }); 
     } else {
       // action success
       return dispatch({
-        type: productsContants.CATEGORY_SUCCESS,
+        type: productsContants.HOME_SUCCESS,
         payload: {
           isError: false,
           isLoading: false,

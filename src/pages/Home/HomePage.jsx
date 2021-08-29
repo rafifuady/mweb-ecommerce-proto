@@ -48,8 +48,11 @@ const styled = makeStyles((theme) => ({
   media: {
     height: 150,
   },
+  productRow: {
+    overflowY: "scroll",
+    margin: theme.spacing(5, 0),
+  },
 }));
-
 
 export function HomePage() {
   const classes = styled();
@@ -57,8 +60,8 @@ export function HomePage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(productsActions.getCategory())
-  }, [])
+    dispatch(productsActions.getCategory());
+  }, []);
   return (
     <>
       <Grid
@@ -83,8 +86,9 @@ export function HomePage() {
       </Grid>
 
       <CategoryListContainer />
-      <ProductHomeContainer />
-      
+      <Grid item className={classes.productRow}>
+        <ProductHomeContainer />
+      </Grid>
     </>
   );
 }

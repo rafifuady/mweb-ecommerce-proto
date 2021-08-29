@@ -49,7 +49,7 @@ export function Routes() {
           {/* {appState.appScreenMobile ? <Redirect to="/" /> : <HomePage />} */}
         </PrivateRoute>
       </Switch>
-      {auth.isAuthenticated === true ? <NavigationContainer /> : ""}
+      {auth.isAuthenticated && <NavigationContainer />}
     </Router>
   ) : (
     "loading"
