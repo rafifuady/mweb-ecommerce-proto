@@ -47,9 +47,6 @@ export function ProductHomeContainer({searchValue}) {
 
   const filteredProduct = filterProduct(product, searchValue);
 
-  console.log(filteredProduct)
-  console.log(filteredProduct)
-
   return (
     <>
       {isLoading && "Loading"}
